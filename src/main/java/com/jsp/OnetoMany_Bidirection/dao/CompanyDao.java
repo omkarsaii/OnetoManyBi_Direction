@@ -37,4 +37,33 @@ public class CompanyDao {
 		entityTransaction.commit();
 	}
 	
+	public void update(int id,Company updatecompany)
+	{
+		EntityManager entityManager=getEntityManager();
+		EntityTransaction entityTransaction=entityManager.getTransaction();
+		
+		entityTransaction.begin();
+		
+		Company companydb=entityManager.find(Company.class, id);
+		
+		if(companydb!=null)
+		{
+			companydb.setName(updatecompany.getName());
+		}
+		
+		List<Employee> updatedEmployees=updatecompany.getEmployee();
+		
+		for(Employee employee :updatedEmployees)
+		{
+			Employee existingEmployee = entityManager.find(Employee.class,employee.getId());
+			 if (existingEmployee != null) {
+                 // Update employee attributes
+                 existingEmployee.setName(employee.getName()); // Assuming Employee has a setName method
+                 // Update other fields as needed
+                 existingEmployee.setCompany(companydb); // Ensure the relationship is maintained
+             }
+		}
+		
+	}
+	
 }
