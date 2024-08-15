@@ -12,15 +12,15 @@ public class App
     public static void main( String[] args )
     {
         Company company=new Company();
-        company.setName("Infosys");
+        company.setName("TCS");
         
         Employee e1=new Employee();
-        e1.setName("Krishna");
+        e1.setName("Krishna updated");
         e1.setAddress("Gujurat");
         
         Employee e2=new Employee();
-        e2.setName("Ram");
-        e2.setAddress("Ayodya");
+        e2.setName("Ram updated");
+        e2.setAddress("Ayodya updated");
         
         List<Employee>list=new ArrayList<Employee>();
         list.add(e1);
@@ -32,6 +32,10 @@ public class App
         e2.setCompany(company);
         
         CompanyDao companyDao=new CompanyDao();
-        companyDao.save(company);
+//        companyDao.save(company);
+        companyDao.update(1, company);
+        
+        
+        
     }
 }
